@@ -47,16 +47,15 @@ export default function AppSelect() {
 
     dispatch({ type: "FETCH_START" });
 
+    const API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
+
     try {
       const GEMINI_API_KEY = "AIzaSyDn-JjZnOK2bpnnngdhKccnRdHYpH7XTsw";
       const response = await fetch(
-        "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent",
+        `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${API_KEY}`,
         {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "x-goog-api-key": GEMINI_API_KEY, 
-          },
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             contents: [
               {
@@ -71,7 +70,7 @@ export default function AppSelect() {
         },
       );
       const data = await response.json();
-      console.log(data?.candidates);
+      console.log(data);
       dispatch({ type: "SET_AI_RESPONSES", payload: data?.candidates || [] });
     } catch (err) {
       console.log(err);
