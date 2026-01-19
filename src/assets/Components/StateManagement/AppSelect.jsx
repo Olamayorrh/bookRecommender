@@ -47,10 +47,10 @@ export default function AppSelect() {
 
     dispatch({ type: "FETCH_START" });
 
-    const API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
+    
 
     try {
-      const GEMINI_API_KEY = "AIzaSyDn-JjZnOK2bpnnngdhKccnRdHYpH7XTsw";
+      const API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
       const response = await fetch(
         `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${API_KEY}`,
         {
